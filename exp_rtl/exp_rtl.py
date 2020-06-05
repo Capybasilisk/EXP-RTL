@@ -1,4 +1,3 @@
-
 import axelrod as axl
 import matplotlib.pyplot as plt
 import random
@@ -12,11 +11,9 @@ class EXP_RTL(axl.player.Player):
     Player increments a _grudges variable by one, computes the current value of 
     _grudges raised to the second power and adds the output to a _retaliations 
     variable.
-
     As long as _retaliations > 0, player will defect on every turn. After each 
     defection by Player, _retaliations is decremented by one, and Player won't 
     resume cooperating until _retaliations == 0.
-
     If Opponent defects while Player is still retaliating, Player increments 
     _retaliations by the new value of grudges raised to the second power.
     """
@@ -77,7 +74,6 @@ class EXP_RTL(axl.player.Player):
         and non-cheating strategies in the Axelrod database. Strategies with very
         high computational cost and/or try to "cheat", eg by modifying their own or
         their opponents source code, have been excluded. 
-
         The results of the tournament are stored to file, along with a series of plots
         that visualize the results.
         """
@@ -89,12 +85,19 @@ class EXP_RTL(axl.player.Player):
                 strategy() for strategy in axl.strategies  
                 if strategy.classifier["long_run_time"] == False]
         
-        tournament = axl.Tournament(players, turns = 200, repetitions = 5)
+        tournament = axl.Tournament(
+            players, 
+            turns = 200, 
+            repetitions = 5)
         
         results = tournament.play()
 
         # Write results to file
-        with open("results.txt", "a", encoding = "UTF-8") as resultsfile:
+        with open(
+            "results.txt", 
+            "a", 
+            encoding = "UTF-8") as resultsfile:
+            
             for player_rank in results.ranked_names:
                 resultsfile.write(f"{player_rank}\n")
 
@@ -115,7 +118,6 @@ class EXP_RTL(axl.player.Player):
         
         """Pits EXP_RTL and 19 strategies chosen at random in 
         the Moran process, a stochastic population process simulating natural selection.
-
         Due to the method's high computational cost, only 20 strategies compete at a
         time, but the random sampling ensures that different strategies are included 
         every time the method is called. with EXP-RTL being the only constant.  
@@ -126,12 +128,18 @@ class EXP_RTL(axl.player.Player):
                 axl.strategies, k = 10) if strategy.classifier[
                 "long_run_time"] == False]
 
-        mp = axl.MoranProcess(players = players, turns = 200)
+        mp = axl.MoranProcess(
+            players = players, 
+            turns = 200)
         
         populations = mp.play()
 
         # Write the sequence of populations to file
-        with open("population_sequence.txt", "a", encoding = "UTF-8") as sequences:
+        with open(
+            "population_sequence.txt", 
+            "a", 
+            encoding = "UTF-8") as sequences:
+            
             for sequence in populations:
                 sequences.write(f"{sequence}\n")
 
@@ -145,4 +153,4 @@ class EXP_RTL(axl.player.Player):
 
 
 
-                
+        
