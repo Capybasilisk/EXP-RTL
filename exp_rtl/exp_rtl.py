@@ -7,15 +7,19 @@ import random
 
 class EXP_RTL(axl.player.Player):
     
-    """Player cooperates as long as Opponent does the same. If Opponent defects,
-    Player increments a _grudges variable by one, computes the current value of 
-    _grudges raised to the second power and adds the output to a _retaliations 
-    variable.
+    """
+    Player cooperates as long as Opponent does the same. If Opponent 
+    defects, Player increments a _grudges variable by one, computes the 
+    current value of _grudges raised to the second power and adds the output 
+    to a _retaliations variable.
+    
     As long as _retaliations > 0, player will defect on every turn. After each 
     defection by Player, _retaliations is decremented by one, and Player won't 
     resume cooperating until _retaliations == 0.
+    
     If Opponent defects while Player is still retaliating, Player increments 
     _retaliations by the new value of grudges raised to the second power.
+    
     """
 
     
@@ -38,8 +42,10 @@ class EXP_RTL(axl.player.Player):
     def __init__(self): 
         super().__init__()
 
-        """Inherits all the attributes and methods of the Player superclass and 
+        """
+        Inherits all the attributes and methods of the Player superclass and 
         initializes the variables that will be manipulated during gameplay.
+        
         """
 
         self._grudges = self._retaliations = 0
@@ -48,7 +54,9 @@ class EXP_RTL(axl.player.Player):
     
     def strategy(self, opponent):
 
+        
         #Defines the strategy that will be used by the agent
+
 
         C, D = axl.action.Action.C, axl.action.Action.D
 
@@ -70,15 +78,18 @@ class EXP_RTL(axl.player.Player):
     
     def tournament(self):
 
-        """Runs a tournament between EXP_RTL and all non-longrunning
-        and non-cheating strategies in the Axelrod database. Strategies with very
-        high computational cost and/or try to "cheat", eg by modifying their own or
-        their opponents source code, have been excluded. 
-        The results of the tournament are stored to file, along with a series of plots
-        that visualize the results.
+        """
+        Runs a tournament between EXP_RTL and all non-longrunning
+        and non-cheating strategies in the Axelrod database. Strategies with 
+        very high computational cost and/or try to "cheat", eg by modifying 
+        their own or their opponents source code, have been excluded. 
+        
+        The results of the tournament are stored to file, along with a series 
+        of plots that visualize the results.
+        
         """
         
-        #Uncomment code below to run tournament with seed:
+        #Uncomment code below to run tournament with random seed:
         #axl.seed(0)
 
         players = [self] + [
@@ -107,8 +118,10 @@ class EXP_RTL(axl.player.Player):
         # Create visual representations of the tournament results with plots 
         plot = axl.Plot(results)
 
-        """All plots are saved to file, including boxplot,
+        """
+        All plots are saved to file, including boxplot,
         winplot, payoff matrix, and more.
+        
         """
         plot.save_all_plots("tournament_visualization")
 
@@ -116,11 +129,15 @@ class EXP_RTL(axl.player.Player):
     
     def moran_process(self):
         
-        """Pits EXP_RTL and 19 strategies chosen at random in 
-        the Moran process, a stochastic population process simulating natural selection.
-        Due to the method's high computational cost, only 20 strategies compete at a
-        time, but the random sampling ensures that different strategies are included 
-        every time the method is called. with EXP-RTL being the only constant.  
+        """
+        
+        Pits EXP_RTL and 19 strategies chosen at random in the Moran process, 
+        a stochastic population process simulating natural selection. Due to 
+        the method's high computational cost, only 20 strategies compete at a
+        time, but the random sampling ensures that different strategies are 
+        included every time the method is called. with EXP-RTL being the only 
+        constant.  
+        
         """
 
         players = [self] + [
@@ -151,6 +168,9 @@ class EXP_RTL(axl.player.Player):
         plt.show()
 
 
+
+
+        
 
 
         
